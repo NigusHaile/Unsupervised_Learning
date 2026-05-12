@@ -1,0 +1,42 @@
+# IMPORT THE TRUE LABELS AND COMPARE THEM WITH THE BEST CLUSTERING SOLUTION
+ind1 = int(np.floor(N/3))
+ind2 = int(np.floor(N/3)) + ind1
+a1  = np.array( [int(0) for j in range(0,ind1+1)] )
+a2  = np.array( [int(1) for j in range(ind1+1,ind2+1)] )
+a3  = np.array( [int(2) for j in range(ind2+1,N)] )
+TRUElabels = np.concatenate( [a1, a2, a3] )
+
+# Scatterplot with random choice of the features to represent the dataset
+fig7 = plt.figure('', figsize=(10,5)) 
+PAL = ['blue', 'red', 'green']
+sns.scatterplot(x=X_transformed[:,best_features[0]], y=X_transformed[:,best_features[1]], hue=TRUElabels, palette=PAL)
+# for k in range(K):
+#   plt.scatter(x=best_kmeans.cluster_centers_[k,0], y=best_kmeans.cluster_centers_[k,1], s=100, color=PAL[k], marker='s', edgecolor='black', linewidth=1.5)
+sns.set_theme(style='dark')
+plt.xlabel('Attribute no.' % best_features[0])
+plt.ylabel('Attribute no.' % best_features[1])
+plt.grid()
+plt.show()
+
+
+
+
+# Match/mis-match between the best clustering solution and the truth
+# print( *best_kmeans.labels_ )
+# print( *TRUElabels )
+
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(TRUElabels, best_kmeans.labels_)
+# print(cm)
+
+import seaborn as sn
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df_cm = pd.DataFrame(cm, range(len(cm)), range(len(cm)))
+fig8 = plt.figure(figsize=(5,3))
+sn.set(font_scale=1.4) # for label size
+sn.heatmap(df_cm, annot=True, annot_kws={"size": 16}) # font size
+plt.xlabel('Predicted labels')
+plt.ylabel('True labels')
+plt.show()

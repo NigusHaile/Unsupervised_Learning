@@ -1,0 +1,68 @@
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
+import pandas as pd
+from sklearn.preprocessing import StandardScaler, Normalizer, MinMaxScaler, RobustScaler
+
+
+
+# fix the seed, so as to have the same values in the matrix at every run
+seed = 1            # seed for random number generation 
+np.random.seed(seed)
+
+# Set the number of objects
+N = 30
+
+# Set the no. of attributes (or features) of the each object
+M = 11
+
+
+# Generate the 2D matrix with different distributions for each attribute (three of them are the same as the previous lab)
+
+# 5 randomly normally distributed attributes in [-1,1]
+s1 = np.random.randn(N,5).round(2)
+
+# 3 uniformly distributed attributes in the open interval [low, high) (includes low, but excludes high)
+s2 = np.random.uniform(low=-60, high=60, size=[N,3])
+
+# 2 linearly dependent attributes, with the first one randomly distributed (only integer) in [1, 10]
+#                         and the second is linearly obtained from the first one (resulted values in [-20, 25])
+s3 = np.random.randint(10, size=(N, 1))
+s4 = s3*5 - 25
+
+# Final combined matrix: 30x10
+X_tmp = np.concatenate((s1,s2,s3,s4), axis=1)
+X_tmp[:,2] = (X_tmp[:,2] - np.mean(X_tmp[:,2]) + 5)/ (np.std(X_tmp[:,2])*2) #move mean to 5 and change std to 2
+X_tmp[:,3] = (X_tmp[:,3] - np.mean(X_tmp[:,3]) - 3)/ (np.std(X_tmp[:,3])*1.5) #move mean to -3 and change std to 1.5
+
+
+# # Simulate 2 classes, visible only on 4 attributes
+i = int(np.floor(N/2))
+K = 2
+X_tmp[0:i+1,[2,3,6,8]]   = ( X_tmp[0:i+1,[2,3,6,8]]  *(-0.5) ).round(2)
+X_tmp[i+1:N+1,[2,3,6,8]] = ( X_tmp[i+1:N+1,[2,3,6,8]]*0.3    ).round(2)
+
+
+# NEW (2023/24)
+X_tmp[:i,6]   = np.abs(X_tmp[:i,6]) + 5
+X_tmp[i+1:,6] = np.abs(X_tmp[i+1:,6]) - 3
+
+
+
+# Add one final column to assign labels to objects: first i objects belong to class "0", the remaining to class "1" (0 and 1 should be numerical)
+a1  = np.array( [int(0) for j in range(0,i)] )
+a2  = np.array( [int(1) for j in range(i,N)] )
+classes = np.concatenate( [a1, a2] )
+X = np.zeros([N,M])
+X[:, 0:M-1] = X_tmp
+X[:,-1] = classes
+
+
+
+# ----------------------------------------
+# Check the matrix shape and values
+# ----------------------------------------
+print("The matrix has shape = ", np.shape(X))
+print('It has %d objects and %d attributes.' % (N, M) )
+# print("Here are all values: \n", X)
