@@ -48,5 +48,7 @@ Bayesian network models:
 ## 🎓 Course info
 
  **Institution:** Università degli Studi di Milano-Bicocca
+ 
  **Program:** Machine Learning for Modelling
+ 
  **Syllabus:** [e-learning portal](https://elearning.unimib.it/course/info.php?id=61656)
