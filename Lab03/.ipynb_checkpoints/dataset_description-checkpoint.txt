@@ -1,4 +1,0 @@
-In this cell, you load the input data, a 2D matrix synthetically created. The matrix has 11 columns, with the first 10 representing the attributes (or features) of each object, and 30 rows that we assume to represent the collection of objects (also called observations or items). The last column has 0 or 1 values, depending on which class the object belongs to: either class "0" or "1" (numerical).
-
-
-# NEW 2023/24: changed X[:,6] to emphasize the difference between classes. This feature can moderately distinguish classes. You should use it together with another feature to get good clusterization.
