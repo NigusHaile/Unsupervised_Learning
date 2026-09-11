@@ -1,7 +1,6 @@
 # Unsupervised Learning
 
-Course materials, notes, and implementations from the **Unsupervised Learning**
-course, part of the Machine Learning for Modelling track. Covers proximity measures, clustering, anomaly detection, and Bayesian networks.
+Notes, and implementations on **Unsupervised Learning**, Covers proximity measures, clustering, anomaly detection, and Bayesian networks.
 
 ## 📚 Topics covered
 
@@ -44,11 +43,3 @@ Bayesian network models:
 - Inference:
   - Exact inference
   - Approximate inference
-
-## 🎓 Course info
-
- **Institution:** Università degli Studi di Milano-Bicocca
- 
- **Program:** Machine Learning for Modelling
- 
- **Syllabus:** [e-learning portal](https://elearning.unimib.it/course/info.php?id=61656)
